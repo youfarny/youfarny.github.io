@@ -15,7 +15,7 @@
             position: relative;
         }
         #map {
-            height: 100%;
+            height: calc(100% - 80px); /* Adjusted to account for title and subtitle height */
             width: 100%;
         }
         .leaflet-popup-content-wrapper {
@@ -71,7 +71,7 @@
 
     <!-- Title and Subtitle -->
     <div id="title">JUST JUSTIN FANS</div>
-    <div id="subtitle">keep zooming in to find justin</div>
+    <div id="subtitle">find your bieber baby!!!</div>
 
     <!-- Map container -->
     <div id="map"></div>
@@ -108,10 +108,15 @@
             var zoomLevel = map.getZoom();
 
             if (zoomLevel < map.getMaxZoom()) {
-                L.popup()
+                var popup = L.popup()
                     .setLatLng([34.0522, -118.2437])
                     .setContent('keep zooming into justin!!!')
                     .openOn(map);
+
+                // Make the popup disappear after 1 second
+                setTimeout(function() {
+                    map.closePopup(popup);
+                }, 1000);
             } else {
                 L.popup()
                     .setLatLng([34.0522, -118.2437])
@@ -159,3 +164,4 @@
 
 </body>
 </html>
+
