@@ -23,7 +23,7 @@
         }
         #popupText {
             font-size: 0.5em;
-            transition: font-size 5s ease;
+            transition: font-size 1s ease; /* Faster enlargement */
         }
         #title {
             position: absolute;
@@ -50,14 +50,14 @@
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 2em;
+            font-size: 4em; /* Increased size for falling hearts */
             color: red;
             pointer-events: none;
-            animation: fall 10s linear infinite;
+            animation: fall 5s linear infinite; /* Shorter duration for more noticeable effect */
         }
         @keyframes fall {
             from {
-                top: -100px;
+                top: -200px; /* Start higher for more dramatic effect */
                 opacity: 1;
             }
             to {
@@ -94,7 +94,7 @@
     <div id="map"></div>
 
     <!-- Message and Image for finding Justin -->
-    <div id="foundMessage">you have found justin! click on him</div>
+    <div id="foundMessage">you have found justin!!!!</div>
     <img id="justinImage" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbiFNHy4eOFfP91upDHcHuBwCoUcUBEtpHgg&s" alt="Justin Bieber" />
 
     <!-- Falling hearts container -->
@@ -146,6 +146,9 @@
                 document.getElementById('justinImage').onclick = function() {
                     window.location.href = 'https://youfarny.github.io/justin/stopstalking.html';
                 };
+
+                // Create falling hearts
+                createFallingHearts();
             }
         });
 
@@ -157,6 +160,11 @@
             if (zoomLevel === map.getMaxZoom()) {
                 popupText.style.fontSize = '2em'; // Make text larger at max zoom
                 popupText.style.cursor = 'pointer'; // Change cursor to pointer for clickable text
+                popupText.style.transition = 'font-size 1s ease'; // Faster enlargement
+
+                // Display the message and image immediately
+                document.getElementById('foundMessage').style.display = 'block';
+                document.getElementById('justinImage').style.display = 'block';
 
                 // Create falling hearts
                 createFallingHearts();
@@ -183,4 +191,5 @@
 
 </body>
 </html>
+
 
