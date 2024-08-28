@@ -13,45 +13,47 @@
             font-family: Arial, sans-serif;
             text-align: center;
             overflow: hidden;
-        }
-        .container {
             position: relative;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
         .message {
             font-size: 3em;
             font-weight: bold;
             z-index: 1;
+            position: relative;
         }
         .emoji {
             position: absolute;
-            font-size: 2em;
-            z-index: 0;
+            font-size: 5em;
             animation: float 10s infinite;
+            opacity: 0.5;
+            pointer-events: none;
         }
         .siren {
-            animation-delay: 0s;
+            top: 20%;
+            left: 20%;
+            animation: flash 2s infinite alternate;
         }
         .crying {
-            animation-delay: 5s;
+            top: 60%;
+            left: 60%;
+            animation: flash 2s infinite alternate;
         }
         @keyframes float {
             0% { transform: translateY(0); }
             50% { transform: translateY(-20px); }
             100% { transform: translateY(0); }
         }
+        @keyframes flash {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="message">
-            STOP STALKING JUSTIN. YOU NEED A LIFE BRUH
-        </div>
-        <div class="emoji siren">🚨</div>
-        <div class="emoji crying">😢</div>
+    <div class="message">
+        STOP STALKING JUSTIN. YOU NEED A LIFE BRUH
     </div>
+    <div class="emoji siren">🚨</div>
+    <div class="emoji crying">😢</div>
 </body>
 </html>
