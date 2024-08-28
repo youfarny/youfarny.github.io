@@ -3,27 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Justin Bieber Fan Page</title>
+    <title>JUST JUSTIN FANS</title>
     <style>
         body {
             font-family: 'Comic Sans MS', cursive, sans-serif;
             background: linear-gradient(to right, #ff7e5f, #feb47b);
             margin: 0;
-            padding: 20px;
-            text-align: center;
+            padding: 0;
             color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
+            font-size: 4em;
+            margin-top: 20px;
             animation: color-change 3s infinite alternate;
         }
-        #map {
-            height: 500px;
-            width: 100%;
-            border-radius: 15px;
+        p {
+            font-size: 1.5em;
             margin-bottom: 20px;
+        }
+        #map {
+            height: calc(100vh - 150px);
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 15px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+        #popupText {
+            font-size: 0.5em;
+            transition: font-size 5s ease;
         }
         #message {
             display: none;
@@ -38,15 +48,12 @@
             border-radius: 15px;
             box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.5);
         }
-        .footer {
-            margin-top: 50px;
-            font-size: 1.2em;
-        }
     </style>
 </head>
 <body>
 
-    <h1>Justin Bieber's (Totally Not Fake) Home</h1>
+    <h1>JUST JUSTIN FANS</h1>
+    <p>zoom in to find our bieber baby!</p>
     
     <!-- Map container -->
     <div id="map"></div>
@@ -56,10 +63,6 @@
         <h2>STOP STALKING ME.</h2>
     </div>
     <img id="justinImage" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbiFNHy4eOFfP91upDHcHuBwCoUcUBEtpHgg&s" alt="Justin Judging You">
-
-    <div class="footer">
-        <p>&copy; 2024 Justin Bieber Fan Club. All rights reserved.</p>
-    </div>
 
     <!-- Include Leaflet.js for the map -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
@@ -85,11 +88,14 @@
 
         // Add a marker to the map with a popup
         var marker = L.marker([34.0522, -118.2437], { icon: justinIcon }).addTo(map)
-            .bindPopup("Justin is here")
+            .bindPopup('<span id="popupText">❣️find justin here</span>')
             .on('click', function() {
                 // Display message and image when the marker is clicked
                 document.getElementById('message').style.display = 'block';
                 document.getElementById('justinImage').style.display = 'block';
+
+                // Slowly enlarge the text
+                document.getElementById('popupText').style.fontSize = '3em';
                 
                 // Zoom in to the "fake" location
                 map.setView([34.0522, -118.2437], 18); 
