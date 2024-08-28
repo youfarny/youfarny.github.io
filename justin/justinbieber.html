@@ -24,9 +24,9 @@
             font-size: 0.5em;
             transition: font-size 5s ease;
         }
-        #popupText img {
-            transition: transform 5s ease;
-            width: 50px;
+        #popupText span {
+            display: block;
+            font-size: 2em; /* Adjust size as needed */
         }
     </style>
 </head>
@@ -52,30 +52,45 @@
         // Create a custom icon for the marker
         var justinIcon = L.divIcon({
             className: 'leaflet-div-icon',
-            html: '<span id="popupText">❣️find your bieber baby here!<br/><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbiFNHy4eOFfP91upDHcHuBwCoUcUBEtpHgg&s" /></span>',
+            html: '<span id="popupText">❣️</span>',
             iconSize: [50, 50]
         });
 
         // Add a marker to the map with a popup
-        var marker = L.marker([34.0522, -118.2437], { icon: justinIcon }).addTo(map)
-            .on('click', function() {
-                // Redirect to the specified page when clicked
-                window.location.href = 'https://youfarny.github.io/justin/stopstalking.html';
-            });
+        var marker = L.marker([34.0522, -118.2437], { icon: justinIcon }).addTo(map);
 
-        // Handle zoom events to control title and image size
+        // Handle click events and zoom level
+        marker.on('click', function() {
+            var zoomLevel = map.getZoom();
+
+            if (zoomLevel < map.getMaxZoom()) {
+                L.popup()
+                    .setLatLng([34.0522, -118.2437])
+                    .setContent('just keep zooming in...')
+                    .openOn(map);
+            } else {
+                L.popup()
+                    .setLatLng([34.0522, -118.2437])
+                    .setContent('you have found justin ❣️')
+                    .openOn(map);
+                
+                // Redirect to the specified page after showing the popup
+                setTimeout(function() {
+                    window.location.href = 'https://youfarny.github.io/justin/stopstalking.html';
+                }, 2000); // 2 seconds delay for user to read the popup
+            }
+        });
+
+        // Handle zoom events to control title
         map.on('zoomend', function() {
             var zoomLevel = map.getZoom();
             var popupText = document.getElementById('popupText');
-            var img = popupText.querySelector('img');
 
             if (zoomLevel === map.getMaxZoom()) {
                 popupText.style.fontSize = '2em'; // Make text larger at max zoom
-                img.style.transform = 'scale(2)'; // Enlarge image at max zoom
                 popupText.style.cursor = 'pointer'; // Change cursor to pointer for clickable text
             } else {
                 popupText.style.fontSize = '0.5em'; // Reset text size
-                img.style.transform = 'scale(1)'; // Reset image size
                 popupText.style.cursor = 'default'; // Reset cursor
             }
         });
@@ -85,4 +100,3 @@
 
 </body>
 </html>
-
