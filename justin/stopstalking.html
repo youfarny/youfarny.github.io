@@ -13,80 +13,68 @@
             font-family: Arial, sans-serif;
             text-align: center;
             overflow: hidden;
+        }
+        .container {
             position: relative;
-            background: black;
-        }
-        .background-emoji {
-            position: absolute;
-            font-size: 3em;
-            opacity: 0.5;
-            pointer-events: none;
-            user-select: none;
-            animation: blink 0.6s infinite;
-        }
-        .siren {
-            color: white;
-        }
-        .crying {
-            color: white;
-        }
-        @keyframes blink {
-            0% { opacity: 0.5; }
-            50% { opacity: 1; }
-            100% { opacity: 0.5; }
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .message {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-        }
-        .message p {
-            margin: 0;
             font-size: 3em;
             font-weight: bold;
             color: red;
-            animation: blink-message 2s infinite;
+            z-index: 1;
+            animation: blink 1s infinite;
         }
-        @keyframes blink-message {
-            0% { opacity: 1; }
-            10% { opacity: 0.5; }
-            20% { opacity: 1; }
-            30% { opacity: 0.5; }
-            40% { opacity: 1; }
-            50% { opacity: 0.5; }
-            60% { opacity: 1; }
-            70% { opacity: 0.5; }
-            80% { opacity: 1; }
-            90% { opacity: 0.5; }
-            100% { opacity: 1; }
+        .emoji {
+            position: absolute;
+            font-size: 2em;
+            z-index: 0;
+            animation: float 10s infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <div class="message">
-        <p>STOP STALKING JUSTIN</p>
-    </div>
-    <script>
-        // Function to fill the background with emojis
-        function fillBackground(emoji, count) {
-            for (let i = 0; i < count; i++) {
-                let span = document.createElement('div');
-                span.className = 'background-emoji';
-                span.textContent = emoji;
-                span.style.top = `${Math.random() * 100}vh`;
-                span.style.left = `${Math.random() * 100}vw`;
-                document.body.appendChild(span);
-            }
-        }
+    <div class="container">
+        <div class="message">
+            STOP STALKING JUSTIN. YOU NEED A LIFE BRUH
+        </div>
 
-        // Fill background with 100 siren and crying emojis
-        fillBackground('🚨', 100);
-        fillBackground('😢', 100);
-    </script>
+        <!-- Generating 50 siren and 50 crying emojis -->
+        <script>
+            const container = document.querySelector('.container');
+
+            for (let i = 0; i < 50; i++) {
+                const siren = document.createElement('div');
+                siren.className = 'emoji siren';
+                siren.textContent = '🚨';
+                siren.style.left = Math.random() * 100 + 'vw';
+                siren.style.top = Math.random() * 100 + 'vh';
+                container.appendChild(siren);
+
+                const crying = document.createElement('div');
+                crying.className = 'emoji crying';
+                crying.textContent = '😢';
+                crying.style.left = Math.random() * 100 + 'vw';
+                crying.style.top = Math.random() * 100 + 'vh';
+                container.appendChild(crying);
+            }
+        </script>
+    </div>
 </body>
 </html>
+
 
 
 
