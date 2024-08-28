@@ -14,69 +14,59 @@
             text-align: center;
             overflow: hidden;
             position: relative;
-            background: radial-gradient(circle, black, black);
+            background: black;
         }
         .background-emoji {
             position: absolute;
             font-size: 3em;
-            color: white;
-            opacity: 0.6;
+            opacity: 0.5;
             pointer-events: none;
             user-select: none;
+            animation: blink 0.6s infinite;
         }
         .siren {
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCI+PHBhdGggZD0iTTE1LDEwIEEyNSwyNSwwLDEsMCAxNSwxMEgyNEExNCwxNCwwLDAsMCwyNCwzMEwxNSwzMCBMOCw0MCBMOSwxMCBMNSwyMCBMMywzMCBMMSwzMCBMMSw5IEgxNiw3IEE4LDg3LDAsMCwxLCw4NyBMMTAsNTAgTDQsMjAgQTgsOCwwLDAsMSw4MEwxMCw0MEwzLDExIEExNSwyNSwwLDEsMCAxNSwxMEg1MEwxMCwyNSIgZmlsbD0iIzAwMEYwRiIvPjwvc3ZnPg==') no-repeat;
-            background-size: 5%;
+            color: white;
         }
         .crying {
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCI+PHBhdGggZD0iTTEyLDkgQTMsMywwLDEsMSwyLDExIEE2LDYgMCAwLDEsNiwyIEE4LDEzIDAsMCwwLDEzLDEyIEExMiwyMiwwLDAsMCwyLDEyIEwxMiwxMiBMOCw4IEE4LDg4LDAsMCwwLDg4IEwxMiwxMiBMNywxMiBMMSw1IEE0LDQsMCwwLDEsNyw0IEEzLDMyLDEsMSwyLDMgTDAsMSIvPjwvc3ZnPg==') no-repeat;
-            background-size: 5%;
+            color: white;
+        }
+        @keyframes blink {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
         }
         .message {
-            position: relative;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             z-index: 1;
         }
         .message p {
             margin: 0;
-            font-size: 2em;
-            font-weight: bold;
-            animation: blink 1s infinite;
-        }
-        .message p.red {
-            color: red;
-        }
-        .message p.white {
-            color: white;
-        }
-        @keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-        .emoji {
-            position: absolute;
             font-size: 3em;
-            color: white;
-            opacity: 0.5;
-            pointer-events: none;
-            user-select: none;
+            font-weight: bold;
+            color: red;
+            animation: blink-message 2s infinite;
+        }
+        @keyframes blink-message {
+            0% { opacity: 1; }
+            10% { opacity: 0.5; }
+            20% { opacity: 1; }
+            30% { opacity: 0.5; }
+            40% { opacity: 1; }
+            50% { opacity: 0.5; }
+            60% { opacity: 1; }
+            70% { opacity: 0.5; }
+            80% { opacity: 1; }
+            90% { opacity: 0.5; }
+            100% { opacity: 1; }
         }
     </style>
 </head>
 <body>
-    <div class="background-emoji siren"></div>
-    <div class="background-emoji crying"></div>
     <div class="message">
-        <p class="red">STOP STALKING JUSTIN</p>
-        <p class="white">YOU NEED A LIFE BRUH</p>
+        <p>STOP STALKING JUSTIN</p>
     </div>
     <script>
         // Function to fill the background with emojis
@@ -97,4 +87,3 @@
     </script>
 </body>
 </html>
-
