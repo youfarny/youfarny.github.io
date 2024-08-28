@@ -12,6 +12,7 @@
             height: 100%;
             font-family: 'Comic Sans MS', cursive, sans-serif;
             background-color: #f4f4f4;
+            position: relative;
         }
         #map {
             height: 100%;
@@ -24,12 +25,59 @@
             font-size: 0.5em;
             transition: font-size 5s ease;
         }
+        #title {
+            position: absolute;
+            top: 10px;
+            width: 100%;
+            text-align: center;
+            color: black;
+            font-size: 2em;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.8); /* Optional: background to ensure readability */
+        }
+        #subtitle {
+            position: absolute;
+            top: 50px;
+            width: 100%;
+            text-align: center;
+            color: black;
+            font-size: 1.2em;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.8); /* Optional: background to ensure readability */
+        }
+        .falling-heart {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2em;
+            color: red;
+            pointer-events: none;
+            animation: fall 10s linear infinite;
+        }
+        @keyframes fall {
+            from {
+                top: -100px;
+                opacity: 1;
+            }
+            to {
+                top: 100%;
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
 
+    <!-- Title and Subtitle -->
+    <div id="title">JUST JUSTIN FANS</div>
+    <div id="subtitle">keep zooming in to find justin</div>
+
     <!-- Map container -->
     <div id="map"></div>
+
+    <!-- Falling hearts container -->
+    <div id="falling-hearts"></div>
 
     <!-- Include Leaflet.js for the map -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
@@ -48,7 +96,7 @@
         // Create a custom icon for the marker
         var justinIcon = L.divIcon({
             className: 'leaflet-div-icon',
-            html: '<span id="popupText">❣️find your bieber baby here!</span>',
+            html: '<span id="popupText" style="cursor: pointer;">❣️</span>',
             iconSize: [50, 50]
         });
 
@@ -62,7 +110,7 @@
             if (zoomLevel < map.getMaxZoom()) {
                 L.popup()
                     .setLatLng([34.0522, -118.2437])
-                    .setContent('just keep zooming in...')
+                    .setContent('keep zooming into justin!!!')
                     .openOn(map);
             } else {
                 L.popup()
@@ -85,11 +133,26 @@
             if (zoomLevel === map.getMaxZoom()) {
                 popupText.style.fontSize = '2em'; // Make text larger at max zoom
                 popupText.style.cursor = 'pointer'; // Change cursor to pointer for clickable text
+
+                // Create falling hearts
+                createFallingHearts();
             } else {
                 popupText.style.fontSize = '0.5em'; // Reset text size
                 popupText.style.cursor = 'default'; // Reset cursor
             }
         });
+
+        function createFallingHearts() {
+            var container = document.getElementById('falling-hearts');
+            container.innerHTML = ''; // Clear any existing hearts
+
+            for (var i = 0; i < 100; i++) {
+                var heart = document.createElement('div');
+                heart.className = 'falling-heart';
+                heart.style.left = Math.random() * 100 + '%';
+                container.appendChild(heart);
+            }
+        }
 
         map.setZoom(10); // Set initial zoom level
     </script>
