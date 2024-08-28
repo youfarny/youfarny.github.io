@@ -65,6 +65,23 @@
                 opacity: 0;
             }
         }
+        #foundMessage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: black;
+            font-size: 3em;
+            z-index: 1000;
+            display: none;
+        }
+        #justinImage {
+            width: 200px;
+            cursor: pointer;
+            display: none;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
@@ -75,6 +92,10 @@
 
     <!-- Map container -->
     <div id="map"></div>
+
+    <!-- Message and Image for finding Justin -->
+    <div id="foundMessage">you have found justin! click on him</div>
+    <img id="justinImage" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbiFNHy4eOFfP91upDHcHuBwCoUcUBEtpHgg&s" alt="Justin Bieber" />
 
     <!-- Falling hearts container -->
     <div id="falling-hearts"></div>
@@ -118,15 +139,13 @@
                     map.closePopup(popup);
                 }, 1000);
             } else {
-                L.popup()
-                    .setLatLng([34.0522, -118.2437])
-                    .setContent('you have found justin ❣️')
-                    .openOn(map);
+                document.getElementById('foundMessage').style.display = 'block';
+                document.getElementById('justinImage').style.display = 'block';
                 
-                // Redirect to the specified page after showing the popup
-                setTimeout(function() {
+                // Redirect when the image is clicked
+                document.getElementById('justinImage').onclick = function() {
                     window.location.href = 'https://youfarny.github.io/justin/stopstalking.html';
-                }, 2000); // 2 seconds delay for user to read the popup
+                };
             }
         });
 
