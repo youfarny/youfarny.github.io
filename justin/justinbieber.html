@@ -13,42 +13,25 @@
             font-family: 'Comic Sans MS', cursive, sans-serif;
             background-color: #f4f4f4;
         }
-        #header {
-            position: absolute;
-            top: 10px;
-            width: 100%;
-            text-align: center;
-            z-index: 1000;
-            color: white;
-            text-shadow: 2px 2px 4px #000;
-        }
-        h1 {
-            font-size: 3em;
-            margin: 0;
-        }
-        p {
-            font-size: 1.2em;
-            margin: 0;
-        }
         #map {
             height: 100%;
             width: 100%;
-            z-index: 0;
+        }
+        .leaflet-popup-content-wrapper {
+            text-align: center;
         }
         #popupText {
             font-size: 0.5em;
             transition: font-size 5s ease;
         }
+        #popupText img {
+            transition: transform 5s ease;
+            width: 50px;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Header with title and subtitle -->
-    <div id="header">
-        <h1>JUST JUSTIN FANS</h1>
-        <p>zoom in to find our bieber baby!</p>
-    </div>
-    
     <!-- Map container -->
     <div id="map"></div>
 
@@ -67,26 +50,39 @@
         }).addTo(map);
 
         // Create a custom icon for the marker
-        var justinIcon = L.icon({
-            iconUrl: 'https://youfarny.github.io/images/justin4.jpg',
-            iconSize: [50, 50],
-            iconAnchor: [25, 50],
-            popupAnchor: [0, -50]
+        var justinIcon = L.divIcon({
+            className: 'leaflet-div-icon',
+            html: '<span id="popupText">❣️find your bieber baby here!<br/><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbiFNHy4eOFfP91upDHcHuBwCoUcUBEtpHgg&s" /></span>',
+            iconSize: [50, 50]
         });
 
         // Add a marker to the map with a popup
         var marker = L.marker([34.0522, -118.2437], { icon: justinIcon }).addTo(map)
-            .bindPopup('<span id="popupText">❣️find justin here</span>')
             .on('click', function() {
-                // Slowly enlarge the text when the marker is clicked
-                document.getElementById('popupText').style.fontSize = '3em';
-                
-                // Zoom in to the "fake" location
-                map.setView([34.0522, -118.2437], 18);
+                // Redirect to the specified page when clicked
+                window.location.href = 'https://youfarny.github.io/justin/stopstalking.html';
             });
 
-        marker.openPopup(); // Automatically open the popup on load
+        // Handle zoom events to control title and image size
+        map.on('zoomend', function() {
+            var zoomLevel = map.getZoom();
+            var popupText = document.getElementById('popupText');
+            var img = popupText.querySelector('img');
+
+            if (zoomLevel === map.getMaxZoom()) {
+                popupText.style.fontSize = '2em'; // Make text larger at max zoom
+                img.style.transform = 'scale(2)'; // Enlarge image at max zoom
+                popupText.style.cursor = 'pointer'; // Change cursor to pointer for clickable text
+            } else {
+                popupText.style.fontSize = '0.5em'; // Reset text size
+                img.style.transform = 'scale(1)'; // Reset image size
+                popupText.style.cursor = 'default'; // Reset cursor
+            }
+        });
+
+        map.setZoom(10); // Set initial zoom level
     </script>
 
 </body>
 </html>
+
