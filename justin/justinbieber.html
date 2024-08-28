@@ -76,6 +76,10 @@
             z-index: 1000;
             display: none;
         }
+        .leaflet-popup-content img {
+            max-width: 300px; /* Adjust size of the image */
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -104,15 +108,14 @@
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // Create a custom icon for the marker using the Justin image
+        // Create a custom icon for the marker
         var justinIcon = L.divIcon({
             className: 'leaflet-div-icon',
-            html: '<img id="justinImage" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbiFNHy4eOFfP91upDHcHuBwCoUcUBEtpHgg&s" style="width: 100px; cursor: pointer;" />',
-            iconSize: [100, 100], // Adjust size as needed
-            iconAnchor: [50, 50] // Center the icon
+            html: '<span id="popupText" style="cursor: pointer;">❣️</span>',
+            iconSize: [50, 50]
         });
 
-        // Add a marker to the map with the Justin image
+        // Add a marker to the map with a popup
         var marker = L.marker([34.0522, -118.2437], { icon: justinIcon }).addTo(map);
 
         // Handle click events and zoom level
@@ -130,16 +133,18 @@
                     map.closePopup(popup);
                 }, 1000);
             } else {
+                var popupContent = '<div>you have found justin!!!!</div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbiFNHy4eOFfP91upDHcHuBwCoUcUBEtpHgg&s" alt="Justin Bieber" id="justinImage" />';
+                
+                // Show the popup with the image
+                L.popup()
+                    .setLatLng([34.0522, -118.2437])
+                    .setContent(popupContent)
+                    .openOn(map);
+
                 // Redirect when the image is clicked
-                document.getElementById('justinImage').onclick = function() {
+                document.querySelector('#justinImage').onclick = function() {
                     window.location.href = 'https://youfarny.github.io/justin/stopstalking.html';
                 };
-
-                // Display the message immediately
-                var foundMessage = document.createElement('div');
-                foundMessage.id = 'foundMessage';
-                foundMessage.innerHTML = 'you have found justin!!!! click on him NOW';
-                document.body.appendChild(foundMessage);
 
                 // Create falling hearts
                 createFallingHearts();
@@ -152,7 +157,11 @@
             var popupText = document.getElementById('popupText');
 
             if (zoomLevel === map.getMaxZoom()) {
-                // Display the message immediately
+                popupText.style.fontSize = '2em'; // Make text larger at max zoom
+                popupText.style.cursor = 'pointer'; // Change cursor to pointer for clickable text
+                popupText.style.transition = 'font-size 1s ease'; // Faster enlargement
+
+                // Display the message and image immediately
                 document.getElementById('foundMessage').style.display = 'block';
 
                 // Create falling hearts
@@ -180,6 +189,7 @@
 
 </body>
 </html>
+
 
 
 
