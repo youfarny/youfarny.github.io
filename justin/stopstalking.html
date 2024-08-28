@@ -13,48 +13,91 @@
             font-family: Arial, sans-serif;
             text-align: center;
             overflow: hidden;
-        }
-        .container {
             position: relative;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background: radial-gradient(circle, black, black);
+        }
+        .background-emoji {
+            position: absolute;
+            font-size: 3em;
+            color: white;
+            opacity: 0.6;
+            pointer-events: none;
+            user-select: none;
+        }
+        .siren {
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCI+PHBhdGggZD0iTTE1LDEwIEEyNSwyNSwwLDEsMCAxNSwxMEgyNEExNCwxNCwwLDAsMCwyNCwzMEwxNSwzMCBMOCw0MCBMOSwxMCBMNSwyMCBMMywzMCBMMSwzMCBMMSw5IEgxNiw3IEE4LDg3LDAsMCwxLCw4NyBMMTAsNTAgTDQsMjAgQTgsOCwwLDAsMSw4MEwxMCw0MEwzLDExIEExNSwyNSwwLDEsMCAxNSwxMEg1MEwxMCwyNSIgZmlsbD0iIzAwMEYwRiIvPjwvc3ZnPg==') no-repeat;
+            background-size: 5%;
+        }
+        .crying {
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCI+PHBhdGggZD0iTTEyLDkgQTMsMywwLDEsMSwyLDExIEE2LDYgMCAwLDEsNiwyIEE4LDEzIDAsMCwwLDEzLDEyIEExMiwyMiwwLDAsMCwyLDEyIEwxMiwxMiBMOCw4IEE4LDg4LDAsMCwwLDg4IEwxMiwxMiBMNywxMiBMMSw1IEE0LDQsMCwwLDEsNyw0IEEzLDMyLDEsMSwyLDMgTDAsMSIvPjwvc3ZnPg==') no-repeat;
+            background-size: 5%;
         }
         .message {
-            font-size: 3em;
-            font-weight: bold;
+            position: relative;
             z-index: 1;
+        }
+        .message p {
+            margin: 0;
+            font-size: 2em;
+            font-weight: bold;
+            animation: blink 1s infinite;
+        }
+        .message p.red {
+            color: red;
+        }
+        .message p.white {
+            color: white;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
         }
         .emoji {
             position: absolute;
-            font-size: 2em;
-            z-index: 0;
-            animation: float 10s infinite;
-        }
-        .siren {
-            animation-delay: 0s;
-        }
-        .crying {
-            animation-delay: 5s;
-        }
-        @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0); }
+            font-size: 3em;
+            color: white;
+            opacity: 0.5;
+            pointer-events: none;
+            user-select: none;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="message">
-            STOP STALKING JUSTIN. YOU NEED A LIFE BRUH
-        </div>
-        <div class="emoji siren">🚨</div>
-        <div class="emoji crying">😢</div>
+    <div class="background-emoji siren"></div>
+    <div class="background-emoji crying"></div>
+    <div class="message">
+        <p class="red">STOP STALKING JUSTIN</p>
+        <p class="white">YOU NEED A LIFE BRUH</p>
     </div>
+    <script>
+        // Function to fill the background with emojis
+        function fillBackground(emoji, count) {
+            for (let i = 0; i < count; i++) {
+                let span = document.createElement('div');
+                span.className = 'background-emoji';
+                span.textContent = emoji;
+                span.style.top = `${Math.random() * 100}vh`;
+                span.style.left = `${Math.random() * 100}vw`;
+                document.body.appendChild(span);
+            }
+        }
+
+        // Fill background with 100 siren and crying emojis
+        fillBackground('🚨', 100);
+        fillBackground('😢', 100);
+    </script>
 </body>
 </html>
+
 
 
 
