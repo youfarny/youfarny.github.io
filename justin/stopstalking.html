@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Stalking Justin</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+        .container {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .message {
+            font-size: 3em;
+            font-weight: bold;
+            z-index: 1;
+        }
+        .emoji {
+            position: absolute;
+            font-size: 2em;
+            z-index: 0;
+            animation: float 10s infinite;
+        }
+        .siren {
+            animation-delay: 0s;
+        }
+        .crying {
+            animation-delay: 5s;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="message">
+            STOP STALKING JUSTIN. YOU NEED A LIFE BRUH
+        </div>
+        <div class="emoji siren">🚨</div>
+        <div class="emoji crying">😢</div>
+    </div>
+</body>
+</html>
