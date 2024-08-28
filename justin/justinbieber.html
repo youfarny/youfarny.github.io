@@ -76,9 +76,11 @@
             z-index: 1000;
             display: none;
         }
-        .leaflet-popup-content img {
-            max-width: 300px; /* Adjust size of the image */
+        #justinImage {
+            width: 200px;
             cursor: pointer;
+            display: none;
+            z-index: 1000;
         }
     </style>
 </head>
@@ -90,6 +92,10 @@
 
     <!-- Map container -->
     <div id="map"></div>
+
+    <!-- Message and Image for finding Justin -->
+    <div id="foundMessage">you have found justin!!!!</div>
+    <img id="justinImage" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbiFNHy4eOFfP91upDHcHuBwCoUcUBEtpHgg&s" alt="Justin Bieber" />
 
     <!-- Falling hearts container -->
     <div id="falling-hearts"></div>
@@ -133,16 +139,11 @@
                     map.closePopup(popup);
                 }, 1000);
             } else {
-                var popupContent = '<div>you have found justin!!!!</div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTbiFNHy4eOFfP91upDHcHuBwCoUcUBEtpHgg&s" alt="Justin Bieber" id="justinImage" />';
+                document.getElementById('foundMessage').style.display = 'block';
+                document.getElementById('justinImage').style.display = 'block';
                 
-                // Show the popup with the image
-                L.popup()
-                    .setLatLng([34.0522, -118.2437])
-                    .setContent(popupContent)
-                    .openOn(map);
-
                 // Redirect when the image is clicked
-                document.querySelector('#justinImage').onclick = function() {
+                document.getElementById('justinImage').onclick = function() {
                     window.location.href = 'https://youfarny.github.io/justin/stopstalking.html';
                 };
 
@@ -163,6 +164,7 @@
 
                 // Display the message and image immediately
                 document.getElementById('foundMessage').style.display = 'block';
+                document.getElementById('justinImage').style.display = 'block';
 
                 // Create falling hearts
                 createFallingHearts();
@@ -189,6 +191,7 @@
 
 </body>
 </html>
+
 
 
 
