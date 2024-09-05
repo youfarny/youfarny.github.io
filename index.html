@@ -38,6 +38,61 @@
         p {
             color: #666;
         }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            position: relative;
+            width: 80%;
+            max-width: 800px;
+            border: 2px solid #000;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .intro {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* For 16:9 aspect ratio */
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .overlay-text {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 18px;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
     </style>
 </head>
 <body>
@@ -48,10 +103,13 @@
     <p>honestly idk what im doing lololol</p>
 </div>
 
-    <div><iframe width="560" height="315" src="https://www.youtube.com/embed/erGJkZZsTds?si=7FEOlgh2Ukk6C5Nz"
-            title="YouTube video player" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+
+    <div class="intro">I want to go back to Japan. I love Japan.</div>
+    
+    <div class="video-container">
+        <div class="overlay-text">Exploring Japan</div>
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+    </div>
 
 </body>
 </html>
