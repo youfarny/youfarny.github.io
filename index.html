@@ -39,41 +39,29 @@
             color: #666;
         }
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
         .container {
+            width: 60%;
+            margin: 50px auto;
             position: relative;
-            width: 80%;
-            max-width: 800px;
-            border: 2px solid #000;
+            text-align: center;
+            background-color: #f0f0f0;
             padding: 20px;
-            background-color: #fff;
+            border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-
-        .intro {
-            font-size: 24px;
-            text-align: center;
-            margin-bottom: 10px;
+        .intro-text {
+            font-size: 20px;
             font-weight: bold;
             color: #333;
+            margin-bottom: 20px;
         }
-
         .video-container {
             position: relative;
-            width: 50%;
-            padding-bottom: 56.25%; /* For 16:9 aspect ratio */
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
             overflow: hidden;
+            max-width: 100%;
         }
-
         .video-container iframe {
             position: absolute;
             top: 0;
@@ -81,18 +69,6 @@
             width: 100%;
             height: 100%;
         }
-
-        .overlay-text {
-            position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 18px;
-            color: #fff;
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 10px;
-            border-radius: 5px;
-            font-weight: bold;
     </style>
 </head>
 <body>
@@ -104,12 +80,13 @@
 </div>
 
 
-    <div class="intro">I want to go back to Japan. I love Japan.</div>
-    
+<div class="container">
+    <div class="intro-text">I want to go back to Japan. I love Japan.</div>
     <div class="video-container">
-        <div class="overlay-text">Exploring Japan</div>
-        <iframe src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&mute=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&mute=1" 
+        frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     </div>
+</div>
 
 </body>
 </html>
